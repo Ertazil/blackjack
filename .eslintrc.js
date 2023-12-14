@@ -97,14 +97,6 @@ module.exports = {
             {
                 count: 2
             }
-        ],
-        "prefer-arrow/prefer-arrow-functions": [
-            "warn",
-            {
-                disallowPrototype: true,
-                singleReturnOnly: false,
-                classPropertiesAllowed: true
-            }
         ]
     }
 };
