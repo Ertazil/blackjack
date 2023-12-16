@@ -10,7 +10,7 @@ export function Paquet(input: number) {
     return deck;
 }
 
-export function Name(input: number) {
+export function NameCarte(input: number) {
     //détermine la valeur
     const buche: { [num: number]: string } = {
         0: "10",
@@ -20,13 +20,7 @@ export function Name(input: number) {
     };
 
     const num = (input % 13 > 9 || input % 13 === 0) ? buche[input % 13] : (input % 13).toString();
-/*
-    let num = (input % 13).toString();
 
-    if(input % 13 > 9 || input % 13 === 0){
-        num = buche[input % 13];
-    }
-*/
     //Détermine la famille
     let fam = "H";      //Heart
 
@@ -39,6 +33,15 @@ export function Name(input: number) {
     }
 
     return num + fam;
+}
+
+export function NameMain(tab: number[]){
+    const main: string[] = [];
+
+    for(const nbr of tab){
+        main.push(NameCarte(nbr));
+    }
+    return main;
 }
 
 export function Pioche(tab: number[]){
@@ -74,4 +77,8 @@ export function Value(tab:number[]){
     }
 
     return sum;
+}
+
+export function newPioche(tab1:number[],tab2:number[]){
+    return tab2.push(Pioche(tab1));
 }
