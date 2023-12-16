@@ -10,6 +10,12 @@ export function Paquet(input: number) {
     return deck;
 }
 
+export function Main(tab: number[]){
+    const main: number[] = [Pioche(tab),Pioche(tab)];
+
+    return main;
+}
+
 export function NameCarte(input: number) {
     //détermine la valeur
     const buche: { [num: number]: string } = {
@@ -41,6 +47,7 @@ export function NameMain(tab: number[]){
     for(const nbr of tab){
         main.push(NameCarte(nbr));
     }
+
     return main;
 }
 
@@ -54,11 +61,11 @@ export function Pioche(tab: number[]){
     return main;
 }
 
-export function Main(tab: number[]){
-    const main: number[] = [Pioche(tab),Pioche(tab)];
-
-    return main;
+export function newPioche(tab1:number[],tab2:number[]){
+    return tab2.push(Pioche(tab1));
 }
+
+
 
 export function Value(tab:number[]){
     let sum = 0;
@@ -79,6 +86,4 @@ export function Value(tab:number[]){
     return sum;
 }
 
-export function newPioche(tab1:number[],tab2:number[]){
-    return tab2.push(Pioche(tab1));
-}
+
