@@ -53,19 +53,16 @@ export function NameMain(tab: number[]){
 
 export function Pioche(tab: number[]){
     const pick = Math.floor(Math.random() * tab.length);
-    //const main: number[] = [];
-
     const main = tab[pick];
+    
     tab.splice(pick,1);
 
     return main;
 }
 
-export function newPioche(tab1:number[],tab2:number[]){
+export function newPioche(tab1: number[],tab2: number[]){
     return tab2.push(Pioche(tab1));
 }
-
-
 
 export function Value(tab:number[]){
     let sum = 0;
@@ -86,4 +83,34 @@ export function Value(tab:number[]){
     return sum;
 }
 
+export function PlayersMain(tab: number[], input: number){
+    let i = 0;
+    const players: number[][] = [];
 
+    while(i < input){
+        players.push(Main(tab));
+        i++;
+    }
+
+    return players;
+}
+
+export function PlayersName(tab: number[][]){
+    const playersmain: string[][] = [];
+
+    for(const nbr of tab){
+        playersmain.push(NameMain(nbr));
+    }
+
+    return playersmain;
+}
+
+export function PlayersValue(tab: number[][]){
+    const playersvalue: number[] = [];
+
+    for(const nbr of tab){
+        playersvalue.push(Value(nbr));
+    }
+
+    return playersvalue;
+}
