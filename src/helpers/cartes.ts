@@ -1,5 +1,5 @@
 
-export function Paquet(input: number) {  // nombre de joueur
+export function Paquet(input: number) {  // nombre de paquet
     const lng = input * 52;
     const deck: number[] = [];
 
@@ -95,20 +95,20 @@ export function PlayersMain(tab: number[], input: number){  // paquet, nombre de
     return players;
 }
 
-export function PlayersName(tab: number[][]){  // tableau des mains
+export function PlayersName(tab: number[], input: number){  // paquet
     const playersmain: string[][] = [];
 
-    for(const nbr of tab){
+    for(const nbr of PlayersMain(tab,input)){
         playersmain.push(NameMain(nbr));
     }
 
     return playersmain;
 }
 
-export function PlayersValue(tab: number[][]){  // tableau des mains
+export function PlayersValue(tab: number[], input: number){  // tableau des mains
     const playersvalue: number[] = [];
 
-    for(const nbr of tab){
+    for(const nbr of PlayersMain(tab,input)){
         playersvalue.push(Value(nbr));
     }
 

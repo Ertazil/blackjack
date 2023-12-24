@@ -6,6 +6,5 @@ import * as partie from "helpers/partie";
 import logger from "utils/logger";
 
 
-const res = partie.BotvsBot();
-
+const res = partie.BotvsBot(2);
 console.log(res);
