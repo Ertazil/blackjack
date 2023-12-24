@@ -1,5 +1,5 @@
 
-export function Paquet(input: number) {
+export function Paquet(input: number) {  // nombre de joueur
     const lng = input * 52;
     const deck: number[] = [];
 
@@ -10,13 +10,26 @@ export function Paquet(input: number) {
     return deck;
 }
 
-export function Main(tab: number[]){
+export function Pioche(tab: number[]){  // paquet
+    const pick = Math.floor(Math.random() * tab.length);
+    const main = tab[pick];
+
+    tab.splice(pick,1);
+
+    return main;
+}
+
+export function newPioche(tab1: number[],tab2: number[]){  // paquet, main
+    return tab2.push(Pioche(tab1));
+}
+
+export function Main(tab: number[]){  // paquet
     const main: number[] = [Pioche(tab),Pioche(tab)];
 
     return main;
 }
 
-export function NameCarte(input: number) {
+export function NameCarte(input: number) {  // numéro de carte
     //détermine la valeur
     const buche: { [num: number]: string } = {
         0: "10",
@@ -41,7 +54,7 @@ export function NameCarte(input: number) {
     return num + fam;
 }
 
-export function NameMain(tab: number[]){
+export function NameMain(tab: number[]){  // une main
     const main: string[] = [];
 
     for(const nbr of tab){
@@ -51,20 +64,7 @@ export function NameMain(tab: number[]){
     return main;
 }
 
-export function Pioche(tab: number[]){
-    const pick = Math.floor(Math.random() * tab.length);
-    const main = tab[pick];
-    
-    tab.splice(pick,1);
-
-    return main;
-}
-
-export function newPioche(tab1: number[],tab2: number[]){
-    return tab2.push(Pioche(tab1));
-}
-
-export function Value(tab:number[]){
+export function Value(tab:number[]){  // une main
     let sum = 0;
     const buche: { [num: number]: number } = {
         0: 10,
@@ -73,7 +73,7 @@ export function Value(tab:number[]){
     };
 
     for(const nbr of tab){
-        if(nbr === 1){
+        if(nbr % 13 === 1){
             sum += sum > 10  ? 1 : 11;
         } else {
             sum += (nbr % 13 > 10 || nbr % 13 === 0) ? buche[nbr % 13] : (nbr % 13);
@@ -83,7 +83,7 @@ export function Value(tab:number[]){
     return sum;
 }
 
-export function PlayersMain(tab: number[], input: number){
+export function PlayersMain(tab: number[], input: number){  // paquet, nombre de joueur
     let i = 0;
     const players: number[][] = [];
 
@@ -95,7 +95,7 @@ export function PlayersMain(tab: number[], input: number){
     return players;
 }
 
-export function PlayersName(tab: number[][]){
+export function PlayersName(tab: number[][]){  // tableau des mains
     const playersmain: string[][] = [];
 
     for(const nbr of tab){
@@ -105,7 +105,7 @@ export function PlayersName(tab: number[][]){
     return playersmain;
 }
 
-export function PlayersValue(tab: number[][]){
+export function PlayersValue(tab: number[][]){  // tableau des mains
     const playersvalue: number[] = [];
 
     for(const nbr of tab){
