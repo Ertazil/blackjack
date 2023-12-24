@@ -1,31 +1,17 @@
 import * as bot from "helpers/bot";
 import * as cartes from "helpers/cartes";
 
-/*
-function generertableaudesjoueur(input: number) {  // nombre de joueur humain
-    const playerstab: { [nom: string]: number; } = { "bot": 0 };
+
+export function tableauresultat(input: number) {  // nombre de joueur humain
+    const playerstab: { [nom: number]: string; } = { 0: "bot win" };
 
     for (let i = 1; i <= input; i++) {
-        const player = `player ${i}`;
-        const playernumber = i;
-
-        playerstab[player] = playernumber;
-    }
-
-    return playerstab;
-}
-*/
-
-export function generertableaudesjoueur(input: number) {  // nombre de joueur humain
-    const playerstab: { [nom: number]: string; } = { 0: "bot" };
-
-    for (let i = 1; i <= input; i++) {
-        const player = `player ${i}`;
+        const player = `player ${i} win`;
         const playernumber = i;
 
         playerstab[playernumber] = player;
     }
-    playerstab[-1] = "all lose";
+    playerstab[-1] = "everybody lose";
 
     return playerstab;
 }
@@ -42,19 +28,28 @@ export function generertableau(input: number) {  // nombre de joueur humain
 
 export function victoire(tab: number[]) {  // tableau des valeur des mains
     let playertab: { [id: number]: string; } = {};
-    playertab = generertableaudesjoueur(tab.length - 1);
-    let winnerid = -1;
+    playertab = tableauresultat(tab.length - 1);
+    let winnersid: number[] = [-1];
+    let winners: string[] = [];
     let winner = 0;
 
-
     for (let i = 0; i <= tab.length; i++) {
-        if (tab[i] >= winner  && tab[i] <= 21) {
+        if (tab[i] > winner  && tab[i] <= 21) {
             winner = tab[i];
-            winnerid = i;
+            winners = [];
+            winnersid = [];
+        }
+
+        if (tab[i] == winner  && tab[i] <= 21) {
+            winnersid.push(i);
         }
     }
 
-    return playertab[winnerid];
+    for (const win of winnersid){
+        winners.push(playertab[win]);
+    }
+
+    return winners;
 }
 
 export function BotvsBot(input: number) {  // nombre de joueur
