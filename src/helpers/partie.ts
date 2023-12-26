@@ -61,6 +61,7 @@ export function BotvsBot(input: number) {  // nombre de joueur
     while(res < 17){
         res = bot.Bot0(paquet, botmain[0]);;
     }
+
     console.log(botmainvalue);
     return victoire(botmainvalue);
 }
