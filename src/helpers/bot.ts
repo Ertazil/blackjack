@@ -1,8 +1,8 @@
 import * as cartes from "helpers/cartes";
 
 
-export function Bot0(input: number, tab1: number[], tab2: number[]){  // valeur de la main, paquet, main
-    if (input <= 15 ){
+export function Bot0(tab1: number[], tab2: number[]){  // paquet, main
+    if (cartes.Value(tab2) < 17 ){
         cartes.newPioche(tab1,tab2);
     }
 

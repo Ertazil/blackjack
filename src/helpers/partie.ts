@@ -54,14 +54,15 @@ export function victoire(tab: number[]) {  // tableau des valeur des mains
 
 export function BotvsBot(input: number) {  // nombre de joueur
     const playerstab = generertableau(input - 1);
-    const paquet = cartes.Paquet(6);
+    const paquet = cartes.Paquet(1);
     const botmain = cartes.PlayersMain(paquet, input);
     const botmainvalue = cartes.PlayersValue(paquet,input);
+    //let botmainvalue = [4,4];
+    let res = botmainvalue[0];
 
-    for (const val of playerstab) {
-        bot.Bot0(botmainvalue[val], paquet, botmain[val]);
+    while(res < 17){
+        res = bot.Bot0(paquet, botmain[0]);;
     }
-    console.log(botmainvalue);
 
     return victoire(botmainvalue);
 }
