@@ -52,14 +52,22 @@ export function victoire(tab: number[]) {  // tableau des valeur des mains
     return winners;
 }
 
-export function BotvsBot(input: number) {  // nombre de joueur
-    const paquet = cartes.Paquet(1);
-    const botmain = cartes.PlayersMain(paquet, input);
-    const botmainvalue = cartes.PlayersValue(paquet,input);
+export function botvsbot(input: number) {  // nombre de joueur
+    const paquet = cartes.paquet(1);
+    const botmain = cartes.playersMain(paquet, input);
+    const botmainvalue = cartes.playersValue(paquet,input);
     let res = botmainvalue[0];
+    let res1 = botmainvalue[1];
 
+    console.log(botmainvalue);
     while(res < 17){
-        res = bot.Bot0(paquet, botmain[0]);;
+        res = bot.bot0(paquet, botmain[0]);;
+        botmainvalue[0] = res;
+    }
+
+    while(res1 < 15){
+        res1 = bot.bot1(paquet, botmain[1]);;
+        botmainvalue[1] = res1;
     }
 
     console.log(botmainvalue);
