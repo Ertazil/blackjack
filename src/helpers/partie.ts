@@ -26,7 +26,12 @@ export function generertableau(input: number) {  // nombre de joueur humain
     return playerstab;
 }
 
-export function victoire(tab: number[]) {  // tableau des valeur des mains
+/**
+ * donne le vainqueur d'une manche
+ * @param tab les valeurs des mains des joueur
+ * @returns le joueur gagnant
+ */
+export function victoire(tab: number[]) {  
     let playertab: { [id: number]: string; } = {};
     playertab = tableauresultat(tab.length - 1);
     let winnersid: number[] = [-1];
