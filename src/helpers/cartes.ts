@@ -3,7 +3,7 @@
  * @param input nombre de paquets
  * @returns un tableau de nombre
  */
-export function paquet(input: number) {  // nombre de paquet
+export function paquet(input: number) {
     const lng = input * 52;
     const deck: number[] = [];
 
@@ -14,7 +14,12 @@ export function paquet(input: number) {  // nombre de paquet
     return deck;
 }
 
-export function pioche(tab: number[]) {  // paquet
+/**
+ * pioche une carte dans le paquet
+ * @param tab paquet
+ * @returns un numéro équivalent à une carte
+ */
+export function pioche(tab: number[]) {
     const pick = Math.floor(Math.random() * tab.length);
     const main = tab[pick];
 
@@ -23,17 +28,33 @@ export function pioche(tab: number[]) {  // paquet
     return main;
 }
 
-export function newPioche(tab1: number[], tab2: number[]) {  // paquet, main
+/**
+ * Pioche une carte pour la mettre dans la main d'un joueur
+ * @param tab1 le paquet
+ * @param tab2 la main du joueur
+ * @returns la nouvelle main du joueur
+ */
+export function newPioche(tab1: number[], tab2: number[]) {
     return tab2.push(pioche(tab1));
 }
 
-export function Main(tab: number[]) {  // paquet
+/**
+ * créer une main en piochant 2 cartes
+ * @param tab le paquet
+ * @returns une main de 2 numéros
+ */
+export function main(tab: number[]) {
     const main: number[] = [pioche(tab), pioche(tab)];
 
     return main;
 }
 
-export function nameCarte(input: number) {  // numéro de carte
+/**
+ * donne la famille et le chiffre associer au numéro d'une carte
+ * @param input un numéro
+ * @returns une carte
+ */
+export function nameCarte(input: number) {
     //détermine la valeur
     const buche: { [num: number]: string; } = {
         0: "10",
@@ -58,7 +79,12 @@ export function nameCarte(input: number) {  // numéro de carte
     return num + fam;
 }
 
-export function nameMain(tab: number[]) {  // une main
+/**
+ * donne la famille et le chiffre associer aux numéros d'une main
+ * @param tab une main
+ * @returns une main de 2 carte
+ */
+export function nameMain(tab: number[]) {
     const main: string[] = [];
 
     for (const nbr of tab) {
@@ -68,7 +94,12 @@ export function nameMain(tab: number[]) {  // une main
     return main;
 }
 
-export function value(tab: number[]) {  // une main
+/**
+ * donne la valeur total d'une main
+ * @param tab une main de carte
+ * @returns la valeur de cette main
+ */
+export function value(tab: number[]) {
     let sum = 0;
     const buche: { [num: number]: number; } = {
         0: 10,
@@ -87,32 +118,48 @@ export function value(tab: number[]) {  // une main
     return sum;
 }
 
-export function playersMain(tab: number[], input: number) {  // paquet, nombre de joueur
+/**
+ * créer un nombre de main en fonction du nombre de joueur
+ * @param tab le paquet
+ * @param input le nombre de joueur
+ * @returns les mains des différents joueur
+ */
+export function playersMain(tab: number[], input: number) {
     let i = 0;
     const players: number[][] = [];
 
     while (i < input) {
-        players.push(Main(tab));
+        players.push(main(tab));
         i++;
     }
 
     return players;
 }
 
-export function playersName(tab: number[], input: number) {  // paquet
+/**
+ * converti les mains de numéro en carte
+ * @param tab les mians des joueurs en numéros
+ * @returns les mains des joueur en cartes
+ */
+export function playersName(tab: number[][]) {
     const playersmain: string[][] = [];
 
-    for (const nbr of playersMain(tab, input)) {
+    for (const nbr of tab) {
         playersmain.push(nameMain(nbr));
     }
 
     return playersmain;
 }
 
-export function playersValue(tab: number[], input: number) {  // tableau des mains
+/**
+ * donne la valeur de la main de chaque joueur
+ * @param tab les mains des joueur en numéros
+ * @returns la valeur des mains des joueurs
+ */
+export function playersValue(tab: number[][]) {
     const playersvalue: number[] = [];
 
-    for (const nbr of playersMain(tab, input)) {
+    for (const nbr of tab) {
         playersvalue.push(value(nbr));
     }
 
