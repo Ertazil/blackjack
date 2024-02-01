@@ -31,8 +31,8 @@ export function pioche(tab: number[]) {
 /**
  * Pioche une carte pour la mettre dans la main d'un joueur
  * @param tab1 le paquet
- * @param tab2 la main du joueur
- * @returns la nouvelle main du joueur
+ * @param tab2 la valeur de la main du joueur
+ * @returns la nouvelle valeur de la main du joueur
  */
 export function newPioche(tab1: number[], tab2: number[]) {
     return tab2.push(pioche(tab1));

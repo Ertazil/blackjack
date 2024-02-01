@@ -31,7 +31,7 @@ export function generertableau(input: number) {  // nombre de joueur humain
  * @param tab les valeurs des mains des joueur
  * @returns le joueur gagnant
  */
-export function victoire(tab: number[]) {  
+export function victoire(tab: number[]) {
     let playertab: { [id: number]: string; } = {};
     playertab = tableauresultat(tab.length - 1);
     let winnersid: number[] = [-1];
@@ -59,24 +59,22 @@ export function victoire(tab: number[]) {
 
 export function botvsbot(input: number) {  // nombre de joueur
     const paquet = cartes.paquet(1);
-    const botmain = cartes.playersMain(paquet, input);
-    const botmainName = cartes.playersName(botmain);
-    const botmainValue = cartes.playersValue(botmain);
+    const allmain = cartes.playersMain(paquet, input);
+    //const allmainName = cartes.playersName(allmain);  servira probablement lorsque qu'il faurdra montrer leur main aux joueurs
+    const allmainValue = cartes.playersValue(allmain);
 
-    let res = botmainValue[0];
-    let res1 = botmainValue[1];
+    let res = allmainValue[0];
+    let res1 = allmainValue[1];
 
-    console.log(botmainValue);
     while (res < 17) {
-        res = bot.bot0(paquet, botmain[0]);;
-        botmainValue[0] = res;
+        res = bot.bot0(paquet, allmain[0]);;
+        allmainValue[0] = res;
     }
 
     while (res1 < 15) {
-        res1 = bot.bot1(paquet, botmain[1]);;
-        botmainValue[1] = res1;
+        res1 = bot.bot1(paquet, allmain[1]);;
+        allmainValue[1] = res1;
     }
 
-    console.log(botmainValue);
-    return victoire(botmainValue);
+    return [cartes.playersName(allmain), victoire(allmainValue)];
 }
