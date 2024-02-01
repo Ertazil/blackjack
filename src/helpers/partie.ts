@@ -1,5 +1,5 @@
-import * as bot from "helpers/bot";
-import * as cartes from "helpers/cartes";
+import { bot0, bot1 } from "helpers/bot";
+import { paquet, playersMain , playersValue, playersName } from "helpers/cartes";
 
 
 export function tableauresultat(input: number) {  // nombre de joueur humain
@@ -58,23 +58,23 @@ export function victoire(tab: number[]) {
 }
 
 export function botvsbot(input: number) {  // nombre de joueur
-    const paquet = cartes.paquet(1);
-    const allmain = cartes.playersMain(paquet, input);
-    //const allmainName = cartes.playersName(allmain);  servira probablement lorsque qu'il faurdra montrer leur main aux joueurs
-    const allmainValue = cartes.playersValue(allmain);
+    const paquets = paquet(1);
+    const allmain = playersMain(paquets, input);
+    //const allmainName = playersName(allmain);  servira probablement lorsque qu'il faurdra montrer leur main aux joueurs
+    const allmainValue = playersValue(allmain);
 
     let res = allmainValue[0];
     let res1 = allmainValue[1];
 
     while (res < 17) {
-        res = bot.bot0(paquet, allmain[0]);;
+        res = bot0(paquets, allmain[0]);;
         allmainValue[0] = res;
     }
 
     while (res1 < 15) {
-        res1 = bot.bot1(paquet, allmain[1]);;
+        res1 = bot1(paquets, allmain[1]);;
         allmainValue[1] = res1;
     }
 
-    return [cartes.playersName(allmain), victoire(allmainValue)];
+    return [playersName(allmain), victoire(allmainValue)];
 }

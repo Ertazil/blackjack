@@ -19,7 +19,7 @@ export function paquet(input: number) {
  * @param tab paquet
  * @returns un numéro équivalent à une carte
  */
-export function pioche(tab: number[]) {
+function pioche(tab: number[]) {
     const pick = Math.floor(Math.random() * tab.length);
     const main = tab[pick];
 
@@ -43,7 +43,7 @@ export function newPioche(tab1: number[], tab2: number[]) {
  * @param tab le paquet
  * @returns une main de 2 numéros
  */
-export function main(tab: number[]) {
+function main(tab: number[]) {
     const main: number[] = [pioche(tab), pioche(tab)];
 
     return main;
@@ -54,7 +54,7 @@ export function main(tab: number[]) {
  * @param input un numéro
  * @returns une carte
  */
-export function nameCarte(input: number) {
+function nameCarte(input: number) {
     //détermine la valeur
     const buche: { [num: number]: string; } = {
         0: "10",
@@ -84,7 +84,7 @@ export function nameCarte(input: number) {
  * @param tab une main
  * @returns une main de 2 carte
  */
-export function nameMain(tab: number[]) {
+function nameMain(tab: number[]) {
     const main: string[] = [];
 
     for (const nbr of tab) {
