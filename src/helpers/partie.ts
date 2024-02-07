@@ -36,16 +36,18 @@ export function victoire(tab: number[]) {
     playertab = tableauresultat(tab.length - 1);
     let winnersid: number[] = [-1];
     let winners: string[] = [];
-    let winner = 0;
+    let plushautemain = 0;
 
     for (let i = 0; i <= tab.length; i++) {
-        if (tab[i] > winner && tab[i] <= 21) {
-            winner = tab[i];
-            winners = [];
-            winnersid = [];
+        if (tab[i] == plushautemain && tab[i] <= 21) {
+            winnersid.push(i);
+            winners.push("split");
         }
 
-        if (tab[i] == winner && tab[i] <= 21) {
+        if (tab[i] > plushautemain && tab[i] <= 21) {
+            plushautemain = tab[i];
+            winners = [];
+            winnersid = [];
             winnersid.push(i);
         }
     }
@@ -76,5 +78,5 @@ export function botvsbot(input: number) {  // nombre de joueur
         allmainValue[1] = res1;
     }
 
-    return [playersName(allmain), victoire(allmainValue)];
+    return [playersName(allmain), allmainValue,victoire(allmainValue)];
 }
