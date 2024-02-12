@@ -31,7 +31,7 @@ function pioche(tab: number[]) {
 /**
  * Pioche une carte pour la mettre dans la main d'un joueur
  * @param tab1 le paquet
- * @param tab2 la valeur de la main du joueur
+ * @param tab2 une main de numéro
  * @returns la nouvelle valeur de la main du joueur
  */
 export function newPioche(tab1: number[], tab2: number[]) {
@@ -65,7 +65,7 @@ function nameCarte(input: number) {
 
     const num = (input % 13 > 9 || input % 13 === 0) ? buche[input % 13] : (input % 13).toString();
 
-    //Détermine la famille
+    //Détermine la famille  ♣️ ♥️ ♦️ ♠️
     let fam = "H";      //Heart
 
     if (input % 52 <= 12) {

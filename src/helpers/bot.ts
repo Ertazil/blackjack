@@ -3,7 +3,7 @@ import { newPioche, value } from "helpers/cartes";
 /**
  * fait piocher une carte si le total est inférieur a 17
  * @param tab1 le paquet
- * @param tab2 la valeur de la main du bot
+ * @param tab2 une main de numéro
  * @returns la nouvelle valeur de la main du bot
  */
 export function bot0(tab1: number[], tab2: number[]) {

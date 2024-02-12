@@ -1,29 +1,56 @@
 import { paquet, playersMain, playersValue, playersName, newPioche } from "helpers/cartes";
+import { victoire } from "helpers/partie";
+import { bot0 } from "helpers/bot";
 
+import * as readline from 'readline';
 
-/**
- * met en place le plateau en fonction du nombre de joueurs
- * @param input nbr de joueur
- * @returns un tableau des mains brutes des joueurs
- */
-export function set(input: number) {
+async function actionjoueur(input: number): Promise<string[]> {
+    const rl = readline.createInterface({
+        input: process.stdin,
+        output: process.stdout
+    });
+
+    let reponse: string = 'o';
+
     const deck = paquet(6);
-    const starthands = playersMain(deck, input);
-    const starthandsValue = playersValue(starthands);
-    const starthandsName = playersName(starthands);
+    const hands = playersMain(deck, input);
+    let handsName = playersName(hands);
+    let handsValue = playersValue(hands);
 
-    return [deck, starthands, starthandsName, starthandsValue];
-}
+    while (reponse.toLowerCase() === 'o') {
 
-/**
- *
- * @param input choix du joueur
- * @returns un ordre ?
- */
-function choices(input: string,) {
-    const start = set(2);
+        console.log(handsName);
+        console.log(handsValue[1]);
 
-    if (input == "pioche"){
-        newPioche(deck, start[3][0]);
+        reponse = await questionAsync(rl, "Voulez-vous piocher une carte ? (o/n): ");
+        if(reponse === "o"){
+            newPioche(deck,hands[1]);
+            handsName = playersName(hands);
+            handsValue = playersValue(hands);
+        }
     }
+
+    while (handsValue[0] < 17) {
+        bot0(deck,hands[1])
+    }
+
+    console.log(handsName);
+    console.log(handsValue);
+    rl.close();
+    return victoire(handsValue);
 }
+
+function questionAsync(rl: readline.Interface, question: string): Promise<string> {
+    return new Promise<string>((resolve) => {
+        rl.question(question, (reponse) => {
+            resolve(reponse);
+        });
+    });
+}
+
+export async function exempleUtilisation() {
+    const resultatFinal = await actionjoueur(2);
+    console.log("Résultat final:", resultatFinal);
+}
+
+
