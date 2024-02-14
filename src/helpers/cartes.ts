@@ -125,7 +125,7 @@ export function value(tab: number[]) {
  * @returns les mains des différents joueur
  */
 export function playersMain(tab: number[], input: number) {
-    let i = 0;
+    let i = 1;
     const players: number[][] = [];
 
     while (i < input) {

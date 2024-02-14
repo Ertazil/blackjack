@@ -1,9 +1,9 @@
-import { paquet, playersMain, playersValue, playersName, newPioche } from "helpers/cartes";
+import { paquet, playersMain, playersValue, playersName, newPioche, value } from "helpers/cartes";
 import { victoire } from "helpers/partie";
 import { bot0 } from "helpers/bot";
 
 import * as readline from 'readline';
-
+import clone from 'clone';
 // /**
 //  * permet de jouer une manche
 //  * @param input nombre de joueur
@@ -68,18 +68,24 @@ async function fullGame(): Promise<number> {
     let id = 0;
 
     while (reponse2.toLowerCase() === 'o') {
-        //await actionjoueur(2,deck);
-
         let reponse: string = 'o';
 
         const hands = playersMain(deck, 2);
         let handsName = playersName(hands);
         let handsValue = playersValue(hands);
 
+        let displayName = clone(handsName);
+
+        displayName[0][1] = '?';
+
+        let tempVal = value([hands[0][0]]);
+
+        let displayValue = [tempVal, handsValue[1]];
+
         while (reponse.toLowerCase() === 'o') {
 
-            console.log(handsName);
-            console.log(handsValue);
+            console.log(displayName);
+            console.log(displayValue);
 
             reponse = await questionAsync(rl, "Voulez-vous piocher une carte ? (o/n): ");
 
@@ -89,7 +95,7 @@ async function fullGame(): Promise<number> {
                 handsValue = playersValue(hands);
             }
 
-            if (handsValue[1] > 21) {
+            if (handsValue[1] >= 21) {
                 reponse = 'n';
             }
         }
@@ -108,7 +114,6 @@ async function fullGame(): Promise<number> {
         id++;
         reponse2 = await questionAsync(rl, "Voulez-vous rejouer ? (o/n): ");
     }
-
 
     rl.close();
     return id;
